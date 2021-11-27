@@ -620,8 +620,25 @@ namespace WindowsFormsApplication6
             int add_value = Convert.ToInt32(textBox_Point4.Text);
             int cur_value = Convert.ToInt32(readPointData("02", "01"));
             cur_value = cur_value - add_value;
+
+            string printStr = "";
+            int cnt = 0;
+            int price_cnt = 0;
+            if (cur_value < 0)
+            {
+                while(cur_value < 0)
+                {
+                    cur_value = cur_value + 1000;
+                    price_cnt = price_cnt + 1000;
+                    cnt = cnt + 1;
+                }
+                printStr = printStr + "您的紅利點數不足，系統自動幫您加值！\n";
+                printStr = printStr + "自動加值：" + price_cnt + " 次數：" + cnt+"\n";
+            }
+            
             writePointData("02", "01", cur_value.ToString());
-            label9.Text = "儲值: " + textBox_Point4.Text + " 可用餘額: " + cur_value.ToString();
+            label9.Text = printStr + "儲值: " + textBox_Point4.Text + " 可用餘額: " + cur_value.ToString();
+
         }
 
         private void textBox_Point4_TextChanged(object sender, EventArgs e)
