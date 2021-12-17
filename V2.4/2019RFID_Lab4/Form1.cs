@@ -6,6 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 //using System.BitConverter;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
+using System.Text;
+using System.IO;
 
 namespace WindowsFormsApplication6
 {
@@ -649,6 +654,24 @@ namespace WindowsFormsApplication6
         private void label9_Click(object sender, EventArgs e)
         {
 
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket.Connect("tux.cs.ccu.edu.tw", 8089); 
+                NetworkStream stream = new NetworkStream(socket);
+                StreamReader sr = new StreamReader(stream);
+                StreamWriter sw = new StreamWriter(stream);
+
+                sw.WriteLine("right"); 
+                sw.Flush();
+            }
+            catch (Exception e1)
+            {
+
+            }
         }
 
         /// <summary>
