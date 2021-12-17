@@ -6,16 +6,22 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 //using System.BitConverter;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
+using System.Text;
+using System.IO;
 
 namespace WindowsFormsApplication6
 {
     public partial class Form1 : Form
     {
+        Socket global_client;
 
         public Form1()
         {
+            System.Diagnostics.Debug.WriteLine("Form1 init");
             InitializeComponent();
-
             textBox_MemID.Text = "R000000001";
 
             textBox_MemName.Text = "ShihMeng Teng";
@@ -66,7 +72,6 @@ namespace WindowsFormsApplication6
             Index = 1;
             uiLength = 64;
 
-
             fixed (MW_EasyPOD* pPOD = &EasyPOD)
             {
 
@@ -84,7 +89,8 @@ namespace WindowsFormsApplication6
                     dwResult = PODfuncs.WriteData(pPOD, WriteBuffer, 12, &uiWritten);    //Send a request command to reader  ,buffer 讀取12個 command 碼
                     uiResult = PODfuncs.ReadData(pPOD, ReadBuffer, uiLength, &uiRead);  //Read the response data from reader
 
-                    tebReadData.Text = BitConverter.ToString(ReadBuffer, 4,(Int32)uiRead - 4).Replace("-", "");  //HEX  從 4 之後開始 讀取 data (Response 欄位 0~4 為 02 12 15 00)
+                    tebReadData.Text = BitConverter.ToString(ReadBuffer, 4, (Int32)uiRead - 4).Replace("-", "");  //HEX  從 4 之後開始 讀取 data (Response 欄位 0~4 為 02 12 15 00)
+
                 }
                 dwResult = PODfuncs.ClearPODBuffer(pPOD);
                 dwResult = PODfuncs.DisconnectPOD(pPOD);
@@ -266,7 +272,8 @@ namespace WindowsFormsApplication6
             try
             {
                 initLen = inputString.Length;
-            } catch
+            }
+            catch
             {
 
             }
@@ -275,11 +282,12 @@ namespace WindowsFormsApplication6
             System.Diagnostics.Debug.WriteLine("1 len=" + inputString.Length);
             if (inputString.Length < 32)
             {
-                for (int i = 0; i < (32 - initLen); i++){
+                for (int i = 0; i < (32 - initLen); i++)
+                {
                     inputString = inputString + "0";
                 }
             }
-            System.Diagnostics.Debug.WriteLine("2 len="+ inputString.Length);
+            System.Diagnostics.Debug.WriteLine("2 len=" + inputString.Length);
 
 
             string TX = WriteCmd + KType + LoadKey.Text + SNum + BNum + inputString;         //組成 Read Data Request
@@ -406,7 +414,7 @@ namespace WindowsFormsApplication6
         /// <param name="hex"></param>
         /// <returns></returns>
         public static byte[] StringToByteArray(String hex)
-         {
+        {
             int NumberChars = hex.Length;
             byte[] bytes = new byte[NumberChars / 2];
             for (int i = 0; i < NumberChars; i += 2)
@@ -495,9 +503,9 @@ namespace WindowsFormsApplication6
 
         private void but_SignCard_Click(object sender, EventArgs e)
         {
-            string id ;
-            string name ;
-            string signdate ;
+            string id;
+            string name;
+            string signdate;
             string point = "";
 
             id = textBox_MemID.Text;
@@ -532,7 +540,7 @@ namespace WindowsFormsApplication6
 
         private void but_ReadCard_Click(object sender, EventArgs e)
         {
-            textBox_MemID2.Text = readData("01","00");
+            textBox_MemID2.Text = readData("01", "00");
             textBox_MemName2.Text = readData("01", "01");
             textBox_SignDay2.Text = readData("01", "02");
             textBox_Point2.Text = readData("01", "03");
@@ -602,7 +610,7 @@ namespace WindowsFormsApplication6
             int cur_value = Convert.ToInt32(readPointData("02", "01"));
             cur_value = cur_value + add_value;
             writePointData("02", "01", cur_value.ToString());
-            label8.Text = "儲值: "+ textBox_Point3.Text + " 可用餘額: "+ cur_value.ToString();
+            label8.Text = "儲值: " + textBox_Point3.Text + " 可用餘額: " + cur_value.ToString();
         }
 
         private void textBox_Point3_TextChanged(object sender, EventArgs e)
@@ -626,16 +634,16 @@ namespace WindowsFormsApplication6
             int price_cnt = 0;
             if (cur_value < 0)
             {
-                while(cur_value < 0)
+                while (cur_value < 0)
                 {
                     cur_value = cur_value + 1000;
                     price_cnt = price_cnt + 1000;
                     cnt = cnt + 1;
                 }
                 printStr = printStr + "您的紅利點數不足，系統自動幫您加值！\n";
-                printStr = printStr + "自動加值：" + price_cnt + " 次數：" + cnt+"\n";
+                printStr = printStr + "自動加值：" + price_cnt + " 次數：" + cnt + "\n";
             }
-            
+
             writePointData("02", "01", cur_value.ToString());
             label9.Text = printStr + "儲值: " + textBox_Point4.Text + " 可用餘額: " + cur_value.ToString();
 
@@ -649,6 +657,25 @@ namespace WindowsFormsApplication6
         private void label9_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket.Connect("tux.cs.ccu.edu.tw", 8089); 
+                NetworkStream stream = new NetworkStream(socket);
+                StreamReader sr = new StreamReader(stream);
+                StreamWriter sw = new StreamWriter(stream);
+
+                sw.WriteLine("right"); 
+                sw.Flush();
+            }
+            catch (Exception e1)
+            {
+
+            }
         }
 
         /// <summary>
@@ -691,7 +718,5 @@ namespace WindowsFormsApplication6
         {
             Close();
         }
-
     }
-
 }
