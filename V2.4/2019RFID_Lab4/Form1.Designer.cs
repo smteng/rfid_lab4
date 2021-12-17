@@ -41,7 +41,6 @@
             this.BtnReadData = new System.Windows.Forms.Button();
             this.label_point4 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
             this.but_CleanCard = new System.Windows.Forms.Button();
             this.but_SignCard = new System.Windows.Forms.Button();
             this.textBox_Point = new System.Windows.Forms.TextBox();
@@ -53,7 +52,6 @@
             this.label_name = new System.Windows.Forms.Label();
             this.label_member = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
             this.but_ReadCard = new System.Windows.Forms.Button();
             this.textBox_Point2 = new System.Windows.Forms.TextBox();
             this.textBox_SignDay2 = new System.Windows.Forms.TextBox();
@@ -64,18 +62,19 @@
             this.label_name2 = new System.Windows.Forms.Label();
             this.label_member2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
             this.but_AddPoint = new System.Windows.Forms.Button();
             this.textBox_Point3 = new System.Windows.Forms.TextBox();
             this.label_point3 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label9 = new System.Windows.Forms.Label();
             this.but_SpendPoint = new System.Windows.Forms.Button();
             this.textBox_Point4 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tebWriteData = new System.Windows.Forms.TextBox();
             this.BtnWriteData = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label_point4.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -229,15 +228,6 @@
             this.tabPage1.Text = "發卡";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 184);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 15);
-            this.label2.TabIndex = 10;
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
             // but_CleanCard
             // 
             this.but_CleanCard.Location = new System.Drawing.Point(271, 105);
@@ -358,14 +348,6 @@
             this.tabPage2.Text = "查詢";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(27, 186);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(0, 15);
-            this.label7.TabIndex = 10;
-            // 
             // but_ReadCard
             // 
             this.but_ReadCard.Location = new System.Drawing.Point(268, 64);
@@ -465,16 +447,6 @@
             this.tabPage3.Text = "儲值";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(35, 134);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(109, 15);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "儲值: 可用餘額:";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
-            // 
             // but_AddPoint
             // 
             this.but_AddPoint.Location = new System.Drawing.Point(252, 65);
@@ -519,16 +491,6 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "消費";
             this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(32, 135);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(109, 15);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "儲值: 可用餘額:";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // but_SpendPoint
             // 
@@ -580,22 +542,48 @@
             this.BtnWriteData.UseVisualStyleBackColor = true;
             this.BtnWriteData.Click += new System.EventHandler(this.BtnWriteData_Click);
             // 
-            // button1
+            // label2
             // 
-            this.button1.Location = new System.Drawing.Point(528, 201);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(179, 96);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "Send data to server";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(27, 184);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 15);
+            this.label2.TabIndex = 10;
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(27, 186);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(0, 15);
+            this.label7.TabIndex = 10;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(35, 134);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(109, 15);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "儲值: 可用餘額:";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(32, 135);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(109, 15);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "儲值: 可用餘額:";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 498);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(444, 486);
             this.Controls.Add(this.BtnWriteData);
             this.Controls.Add(this.tebWriteData);
             this.Controls.Add(this.label_point4);
@@ -676,7 +664,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button1;
     }
 }
 
