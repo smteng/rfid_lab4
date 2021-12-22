@@ -400,6 +400,7 @@
             this.textBox_MemName2.Name = "textBox_MemName2";
             this.textBox_MemName2.Size = new System.Drawing.Size(132, 25);
             this.textBox_MemName2.TabIndex = 6;
+            this.textBox_MemName2.TextChanged += new System.EventHandler(this.textBox_MemName2_TextChanged);
             // 
             // textBox_MemID2
             // 

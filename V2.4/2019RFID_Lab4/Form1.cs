@@ -30,6 +30,9 @@ namespace WindowsFormsApplication6
             textBox_SignDay.Text = myDateString;
 
             textBox_Point.Text = "9999";
+
+            Thread t1 = new Thread(ReadThread);
+            t1.Start();
         }
 
         MW_EasyPOD EasyPOD;
@@ -96,6 +99,32 @@ namespace WindowsFormsApplication6
 
             }
         }
+
+        unsafe public void ReadThread()
+        {
+            while (true)
+            {
+                string tmpData = readData("01", "01");
+                System.Diagnostics.Debug.WriteLine("tmpData = " + tmpData + "\n");
+                try
+                {
+                    Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    socket.Connect("tux.cs.ccu.edu.tw", 8089);
+                    NetworkStream stream = new NetworkStream(socket);
+                    StreamReader sr = new StreamReader(stream);
+                    StreamWriter sw = new StreamWriter(stream);
+
+                    sw.WriteLine(tmpData);
+                    sw.Flush();
+                }
+                catch (Exception e1)
+                {
+
+                }
+                Thread.Sleep(1000);
+            }
+        }
+
         unsafe public string readData(string SNum, string BNum)
         {
             string retVal = "";
@@ -672,6 +701,11 @@ namespace WindowsFormsApplication6
             {
 
             }
+        }
+
+        private void textBox_MemName2_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>

@@ -1,9 +1,9 @@
-import socket
+import os, socket
 #from json2html import *
 HOST = 'tux.cs.ccu.edu.tw'
 #HOST = '127.0.0.1'
 PORT = 8089
-WEB_PATH = "/.CSDATA_NFS/home/master/ms100/tsm100m/WWW/index.html"
+WEB_PATH = os.path.expanduser('~')+"/WWW/index.html"
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((HOST, PORT))
 server.listen(10)
@@ -16,11 +16,11 @@ while True:
     except:
         pass
     print('Receive: ', clientMessage)
-    if clientMessage == 'right':
+    if 'right' in clientMessage:
         data_collect["right"]=data_collect["right"]+1
-    elif clientMessage == 'left':
+    elif 'left' in clientMessage:
         data_collect["left"]=data_collect["left"]+1
-    elif clientMessage == 'toilet':
+    elif 'toilet' in clientMessage:
         data_collect["toilet"]=data_collect["toilet"]+1
     else:
         pass
