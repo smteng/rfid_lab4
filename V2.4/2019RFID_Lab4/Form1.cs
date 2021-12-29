@@ -108,7 +108,7 @@ namespace WindowsFormsApplication6
 
                 string curFile = @"toilet";
                 Console.WriteLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
-                if (File.Exists(curFile))
+                if (File.Exists(curFile) & tmpData != "")
                 {
                     tmpData = "toilet";
                 }
