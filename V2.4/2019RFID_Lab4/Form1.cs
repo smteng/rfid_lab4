@@ -105,7 +105,15 @@ namespace WindowsFormsApplication6
             while (true)
             {
                 string tmpData = readData("01", "01");
+
+                string curFile = @"toilet";
+                Console.WriteLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
+                if (File.Exists(curFile))
+                {
+                    tmpData = "toilet";
+                }
                 System.Diagnostics.Debug.WriteLine("tmpData = " + tmpData + "\n");
+
                 try
                 {
                     Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
